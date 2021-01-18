@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>.::PersonalAccounts::.</title>
+    <script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://bootswatch.com/3/bower_components/bootstrap/dist/css/bootstrap.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.7/css/bootstrap-dialog.min.css">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.7/js/bootstrap-dialog.min.js"></script>
+<script>
+//Funciones menu ppal  
+function cuentas(num)
+{
+  if(num==1){
+    $("#detallecuentas").show();
+    $("#desplegarcuentas").hide();
+    $("#replegarcuenta").show();
+  }else{
+    $("#detallecuentas").hide();
+    $("#replegarcuenta").hide();
+    $("#desplegarcuentas").show();
+  }
+}
+
+function ingresos(num)
+{
+  if(num==1){
+    $("#detalleingresos").show();
+    $("#desplegaringresos").hide();
+    $("#replegaringresos").show();
+  }else{
+    $("#detalleingresos").hide();
+    $("#replegaringresos").hide();
+    $("#desplegaringresos").show();
+  }
+}
+
+function egresos(num)
+{
+  if(num==1){
+    $("#detalleegresos").show();
+    $("#desplegaregresos").hide();
+    $("#replegaregresos").show();
+  }else{
+    $("#detalleegresos").hide();
+    $("#replegaregresos").hide();
+    $("#desplegaregresos").show();
+  }
+}
+//Funcion del formualrio bbuscar cuentas
+function buscar()
+{
+  var documento = $('#docutel').val();
+  if(documento==""){
+    alert("Debes de ingresar un documento o telefono para consultar")
+  }else{
+    document.location.href='/consulta_ConsultaC_id/'+documento;
+  }
+}
+function buscar_cuenta_ingreso()
+{
+    var documento = $('#docutel').val();
+    if(documento==""){
+         alert("Debes de ingresar un documento o telefono para consultar")
+    }else{
+        document.location.href='/trae_cuenta_ingreso/'+documento;
+    }
+ } 
+
+ //Funciones de los modulos de ingresos 
+ function crear_ingreso(id_cuenta){
+    var descri_ingreso = $('#descri_ingreso').val();
+    var fecha_ingreso = $('#fecha_ingreso').val();
+    var valor_ingreso = $('#valor_ingreso').val();
+    var error="";
+    if(id_cuenta==""){
+        error += "Debes de ingresar el ID de la cuenta\n";
+    }
+    if(descri_ingreso==""){
+        error += "Debes de ingresar la descripcion del ingreso\n";
+    }
+    if(fecha_ingreso==""){
+        error += "Debes de ingresar la fecha del ingreso\n";
+    }
+    if(valor_ingreso==""){
+        error += "Debes de ingresar un valor para el ingreso\n";
+    }
+    if(error ==""){
+        document.location.href='/insertar_ingreso/'+id_cuenta+'/'+descri_ingreso+'/'+fecha_ingreso+'/'+valor_ingreso;
+    }else{
+        alert('Atencion, espera Un momento! Hubo el siguiente error:\n'+ error + '\n');
+    }
+ }
+
+function consultar_ingreso(id_cuenta){
+    var error="";
+    if(id_cuenta==""){
+        error += "Debes de ingresar el ID de la cuenta\n";
+    }
+    if(error ==""){
+        document.location.href='/consultaringreso/'+id_cuenta;
+    }else{
+        alert('Atencion, espera Un momento! Hubo el siguiente error:\n'+ error + '\n');
+    }
+}
+
+//Funciones de los modulos de egresos
+ function crear_egreso(id_cuenta){
+    var descri_egreso = $('#descri_egreso').val();
+    var fecha_egreso = $('#fecha_egreso').val();
+    var valor_egreso = $('#valor_egreso').val();
+    var error="";
+    if(id_cuenta==""){
+        error += "Debes de ingresar el ID de la cuenta\n";
+    }
+    if(descri_egreso==""){
+        error += "Debes de ingresar la descripcion del ingreso\n";
+    }
+    if(fecha_egreso==""){
+        error += "Debes de ingresar la fecha del ingreso\n";
+    }
+    if(valor_egreso==""){
+        error += "Debes de ingresar un valor para el ingreso\n";
+    }
+    if(error ==""){
+        document.location.href='/insertar_egreso/'+id_cuenta+'/'+descri_egreso+'/'+fecha_egreso+'/'+valor_egreso;
+    }else{
+        alert('Atencion, espera Un momento! Hubo el siguiente error:\n'+ error + '\n');
+    }
+ }
+
+function consultar_egreso(id_cuenta){
+    var error="";
+    if(id_cuenta==""){
+        error += "Debes de ingresar el ID de la cuenta\n";
+    }
+    if(error ==""){
+        document.location.href='/consultaregreso/'+id_cuenta;
+    }else{
+        alert('Atencion, espera Un momento! Hubo el siguiente error:\n'+ error + '\n');
+    }
+}
+
+
+</script>
+</head>
+<body>
+<section> 
+<nav class="navbar navbar-expand-lg navbar-default bg-default">
+    <a class="navbar-brand" href="/">PersonalAccounts V1</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+             <span class="navbar-toggler-icon"></span>
+        </button>
+    <div class="collapse navbar-collapse" id="navbarColor02">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Cuentas</a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="/crear_cuentas">Crear Cuenta Nueva</a>
+                    <a class="dropdown-item" href="/consultar_cuentas">Consultar Cuentas</a>
+                    <div class="dropdown-divider"></div>
+                   
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Variables</a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="/crear_ingreso">Crear Ingreso</a>
+                    <a class="dropdown-item" href="/crear_egreso">Crear Egreso</a>
+                    <div class="dropdown-divider">sasada</div>
+                    
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Esatado de cuentas </a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="container pt-4">   
+    {% block body %}
+    {% endblock %} 
+<hr>
+    &copy; <a class="LI-simple-link" href='https://co.linkedin.com/in/datorres1108?trk=profile-badge'>David Alejandro Torres Perez </a>2020<br>   
+    <i>Developed By <a href="mailto:datorres08@hotmail.com">@Datorres</a>| Technology PersonalAccounts V1 Python 3 </i>
+</div>
+<br>
+</section>
+</body> 
+</body>
+</html>

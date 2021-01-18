@@ -1,0 +1,68 @@
+{% extends 'layout.html' %}
+{% block body %}
+<html>
+    <head>
+        <title>.::PersonalAccounts-CrearEgresoVariable::.</title>
+    </head>
+<body>
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3><strong>Crear Egresos variables</strong><br></h3>
+        <p>
+            En este modulo puedes crear los egresos que son variables tales como, pasajes,comida, diversion, deudas, servicios publicos etc.
+            Recuerda que cada uno de estos los debes de asociar a tu cuenta para que de esta manera la app te lleve tus cuentas.
+        </p>
+    </div>
+    <div class="panel-body">	
+        {% with mensajes = get_flashed_messages()  %}
+        {% if mensajes %}
+        {% for message in mensajes %}                
+          <div class="alert alert-dismissible alert-success">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong>Muy Bien</strong>  {{ message }} <a href="#" class="alert-link"></a>.
+          </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+        <hr>
+        <table class="table table-striped table-hover table-bordered table-sm bg-white">
+            <thead>
+              <tr>
+                <td>ID Cuenta</td>
+                <td>Descripción del Egreso</td>
+                <td>Fecha del Egreso </td>
+                <td>Valor </td>
+                <td></td>
+                <td></td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                    <input type="text" name="idcuenta" id="idcuenta" class="form-control"  placeholder="ID cuenta">
+                </td>
+                <td>
+                    <input type="text" name="descri_egreso" id="descri_egreso" class="form-control" placeholder="Descripcion" >
+                </td>
+               <td>
+                    <input type="date" name="fecha_egreso" id="fecha_egreso" class="form-control" ></td>
+               <td> 
+                   <input type="number" name="valor_egreso" id="valor_egreso" class="form-control" placeholder="Valor sin putos y comas (.,)" >
+                </td>
+                <td>
+                   <span class="btn btn-primary" onclick="crear_egreso($('#idcuenta').val())">Crear Egreso</span>
+                </td>
+                <td>
+                   <span class="btn btn-primary" onclick="consultar_egreso($('#idcuenta').val())">Consultar Egreso</span>
+                </td>
+              </tr>
+            </tbody>
+        </table>
+    </div>  
+    <div class="panel-footer">
+
+    </div>  
+</div>    
+</body>
+</html>
+{% endblock %}

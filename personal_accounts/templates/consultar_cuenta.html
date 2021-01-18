@@ -1,0 +1,110 @@
+{% extends 'layout.html' %}
+{% block body %}
+<html>
+    <head>
+        <title>.::PersonalAccounts-ConsultarCuenta::.</title>
+    </head>
+    <body>
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3><strong>Consultar cuenta</strong><br></h3>
+                <p>
+                    En este modulo puedes consultar las cuentas creadas con tu número de identificación o teléfono que ya previamente registraste.
+                </p>
+            </div>
+            <div class="panel-body">	
+                <form action="#" method="POST">
+                    <div class="panel-body">
+                        <div class="form-row"> 
+                            <div class="form-group col-md-4">
+                                <b>Numero de documento o celular:</b><br>
+                                <input type="number" name="docutel" id="docutel" class="form-control" placeholder="Numero de documento o celular sin puntos y comas (. ,)" style="border: 1px solid #ff6666;" required="required"  autofocus="true">
+                            </div> 
+                            <div class="form-group col-md-2">
+                                <br>
+                                <span class="btn btn-primary" onclick="buscar()">Buscar</span>
+                                <span class="btn btn-success" onclick="document.location.href='/';"> Cancelar</span>
+                            </div>
+                        </div>    
+                    </div>
+                </form>
+                {% with mensajes = get_flashed_messages()  %}
+                {% if mensajes %}
+                {% for message in mensajes %}                
+                  <div class="alert alert-dismissible alert-success">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong>Muy Bien</strong>  {{ message }} <a href="#" class="alert-link"></a>.
+                  </div>
+                {% endfor %}
+                {% endif %}
+                {% endwith %}
+                <hr>
+                <p>Cuentas activas (estado 1) para el documento consultado</p>
+                <table class="table table-striped table-hover table-bordered table-sm bg-white">
+                    <thead>
+                      <tr>
+                        <td>ID Cuenta</td>
+                        <td>Identificación Cuenta</td>
+                        <td>Nombres de la cuenta</td>
+                        <td>Ingresos Netos </td>
+                        <td>Estado Cuenta </td>
+                        <td colspan="3"></td>
+                      </tr>
+                    </thead>
+                    <tbody>
+                     {% for cuenta in cuentasact %}
+                      <tr>
+                        <td>{{cuenta.0}}</td>
+                        <td>{{cuenta.1}}</td>
+                        <td>{{cuenta.2}}</td>
+                        <td>{{'{:,.2f}'.format(cuenta.3)}}</td>
+                        <td>{{cuenta.4}}</td>
+                        <td>
+                          <a href="/ver_cuenta/{{cuenta.0}}" class="btn btn-primary">Ver Cuenta</a>
+                        </td>
+                        <td>  
+                          <a href="/activaInactivaC/{{cuenta.0}}/{{cuenta.1}}/{{cuenta.4}}" class="btn btn btn-success">Inactivar Cuenta</a>
+                        </td>
+                        <td> 
+                          <a href="/eliminarCuenta/{{cuenta.0}}/{{cuenta.1}}" class="btn btn-danger btn-delete">Eliminar Cuenta</a>
+                        </td>
+                      </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                <br>
+                <p>Cuentas inactivas (Estado 0) para el documento consultado</p>
+                <table class="table table-striped table-hover table-bordered table-sm bg-white">
+                    <thead>
+                      <tr>
+                        <td>ID Cuenta</td>
+                        <td>Identificación Cuenta</td>
+                        <td>Nombres de la cuenta</td>
+                        <td>Ingresos Netos </td>
+                        <td>Estado Cuenta </td>
+                        <td colspan="3"></td>
+                      </tr>
+                    </thead>
+                    <tbody>
+                     {% for cuentai in cuentasinct %}
+                      <tr>
+                        <td>{{cuentai.0}}</td>
+                        <td>{{cuentai.1}}</td>
+                        <td>{{cuentai.2}}</td>
+                        <td>{{'{:,.2f}'.format(cuentai.3)}}</td>
+                        <td>{{cuentai.4}}</td>
+                        <td>  
+                          <a href="/activaInactivaC/{{cuentai.0}}/{{cuentai.1}}/{{cuentai.4}}" class="btn btn btn-success">Activar Cuenta</a>
+                        </td>
+                      </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>  
+            <div class="panel-footer">
+              
+            </div>  
+        </div>    
+    </body>
+</html>
+{% endblock %}

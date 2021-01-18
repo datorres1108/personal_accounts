@@ -1,0 +1,32 @@
+{% extends 'layout.html' %}
+{% block body %}
+<div class="list-group">
+    <button type="button" class="list-group-item list-group-item-action disabled">
+        <strong>PersonalAccounts V1</strong></h2>
+    </button>
+    
+    <!--Modulo de cuentas-->
+    <a href="javascript:cuentas(1)" class="list-group-item list-group-item-action" id="desplegarcuentas" style="cursor:pointer;text-decoration:none;">  <strong> Cuentas</strong> </a>
+    <a href="javascript:cuentas(2)" class="list-group-item list-group-item-action" id="replegarcuenta" style="display:none;cursor:pointer;text-decoration:none;"> <strong> Cuentas </strong></a>
+    <div id="detallecuentas" style="display:none">
+        <spam  class="list-group-item list-group-item-action"  onclick="document.location.href='/crear_cuentas';" style="cursor:pointer;text-decoration:none;">
+             Crear Cuenta Nueva
+        </spam>
+        <spam  class="list-group-item list-group-item-action"  onclick="document.location.href='/consultar_cuentas';" style="cursor:pointer;text-decoration:none;">
+             Consultar Cuentas
+        </spam>
+    </div>
+    <!--Modulo de ingresos-->
+    <a href="javascript:ingresos(1)" class="list-group-item list-group-item-action" id="desplegaringresos" style="cursor:pointer;text-decoration:none;">  <strong> Variables</strong> </a>
+    <a href="javascript:ingresos(2)" class="list-group-item list-group-item-action" id="replegaringresos" style="display:none;cursor:pointer;text-decoration:none;"> <strong> Variables </strong></a>
+    <div id="detalleingresos" style="display:none">
+        <spam  class="list-group-item list-group-item-action"  onclick="document.location.href='/crear_ingreso';" style="cursor:pointer;text-decoration:none;">
+            Crear Ingreso 
+        </spam>
+        <spam  class="list-group-item list-group-item-action"  onclick="document.location.href='/crear_egreso';" style="cursor:pointer;text-decoration:none;">
+            Crear Egresos 
+        </spam>
+    </div>
+
+</div>      
+{% endblock %}

@@ -1,0 +1,128 @@
+{% extends 'layout.html' %}
+{% block body %}
+<html>
+    <head>
+        <title>.::PersonalAccounts-VerCuenta::.</title>
+		<script>
+		function imprim1(imp1)
+		{
+			var printContents = document.getElementById('imp1').innerHTML;
+			w = window.open();
+			w.document.write(printContents);
+			w.document.close(); // necessary for IE >= 10
+			w.focus(); // necessary for IE >= 10
+			w.print();
+			w.close();
+			return true;
+		}
+		</script>
+    </head>
+<body>
+<div id="imp1">
+		{% for cuenta in cuentasact %}	
+		<table class="table table-striped table-hover ">
+			<tr>
+				<td><b>ID Cuenta Nro:</b> </td>
+				<td> <input type="text" class="form-control" disabled="disabled" value="{{cuenta.0}}"> </td>
+				<td><b>Nombre de la Cuenta :</b> </td>
+				<td> <input type="text" class="form-control" disabled="disabled" value="{{cuenta.2}}"> </td>
+			</tr>
+			<tr>
+				<td><b>Identificador Cuenta Nro:</b> </td>
+				<td> <input type="text" class="form-control" disabled="disabled" value="{{cuenta.1}}"> </td>
+				<td><b>Estado de la Cuenta :</b>(1 = Activa | 0 = inactiva) </td>
+				<td> <input type="text" class="form-control" disabled="disabled" value="{{cuenta.4}}"> </td>
+			</tr>
+			<tr>
+				<td><b>Valor registro ingresos fijos mensuales:</b> </td>
+				<td colspan="3"> <input type="text" class="form-control" disabled="disabled" value="{{'{:,.2f}'.format(cuenta.3)}}"> </td>
+			</tr>
+			<tr>
+				<td colspan="4"><b>Ingresos variables a la fecha:</b></td>
+			</tr>
+			<tr>
+				<td colspan="4">
+					<table class="table table-striped table-hover" border="1">
+						<tr>
+							<td><b>ID-Ingreso</b></td>
+							<td><b>Descripcion del Ingreso</b></td>
+							<td><b>Fecha de ingreso</b></td>
+							<td><b>Valor del Ingreso</b></td>
+						</tr>
+						{% for cuneta_ingvar in cuneta_ingvar %}	
+						<tr>
+							<td>{{cuneta_ingvar.0}}</td>
+							<td>{{cuneta_ingvar.1}}</td>
+							<td>{{cuneta_ingvar.3}}</td>
+							<td>{{'{:,.2f}'.format(cuneta_ingvar.2)}}</td>
+						</tr>
+						{% endfor %}
+						<tr>
+							<td colspan="3"><b>Total Ingresos variables a la fecha</b></td>
+							{% for total in totalesing %}	
+							<td><b>{{total.3}}</b></td>
+							{% endfor %}
+						</tr>	
+					</table>	
+				</td>
+			</tr>
+			<tr>
+				<td colspan="4"><b>Egresos variables a la fecha:</b></td>
+			</tr>
+			<tr>
+				<td colspan="4">
+					<table class="table table-striped table-hover" border="1">
+						<tr>
+							<td><b>ID-Egreso</b></td>
+							<td><b>Descripcion del Egreso</b></td>
+							<td><b>Fecha de Egreso</b></td>
+							<td><b>Valor del Egreso</b></td>
+						</tr>
+						{% for cuneta_egvar in cuneta_egvar %}	
+						<tr>
+							<td>{{cuneta_egvar.0}}</td>
+							<td>{{cuneta_egvar.1}}</td>
+							<td>{{cuneta_egvar.3}}</td>
+							<td>{{'{:,.2f}'.format(cuneta_egvar.2)}}</td>
+						</tr>
+						{% endfor %}
+						<tr>
+							<td colspan="3"><b>Total Egresos variables a la fecha</b></td>
+							{% for saldos_total in totaleseg %}	
+							<<td><b>{{'{:,.2f}'.format(saldos_total.0)}}</b></td>
+							{% endfor %}
+						</tr>	
+					</table>	
+				</td>
+			</tr>
+			<!--{% for totaliza in totaliza %}-->
+			<tr>
+				<td colspan="3"><b>Total ingresos fijos mensuales(+)</b></td>
+				<td>{{'{:,.2f}'.format(totaliza.0)}}</td>
+			</tr>
+			<tr>
+				<td colspan="3"><b>Total ingresos variables mensuales(+)</b></td>
+				<td>{{'{:,.2f}'.format(totaliza.1)}}</td>
+			</tr>
+			<tr>
+				<td colspan="3"><b>Total fijo y variables(+)</b></td>
+				<td>{{'{:,.2f}'.format(totaliza.3)}}</td>
+			</tr>
+			<tr>
+				<td colspan="3"><b>Total egresos variables mensuales</b></td>
+				<td>{{'{:,.2f}'.format(totaliza.2)}}</td>
+			</tr>
+			<tr>
+				<td colspan="3"><b>Total saldo disponible</b></td>
+				<td>{{'{:,.2f}'.format(totaliza.4)}}</td>
+			</tr>
+			<!--{% endfor %}-->
+		</table>
+		 {% endfor %}
+
+</div>
+<hr>
+<button type="button" onclick="javascript:imprim1(imp1);">Imprimir</button>   
+</body>
+</html>
+{% endblock %}

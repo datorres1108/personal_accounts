@@ -1,0 +1,51 @@
+{% extends 'layout.html' %}
+{% block body %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>.::PerosnalAccounts-ConsultarEgresos::.</title>
+</head>
+<body>
+<div class="panel panel-primary">
+	<div class="panel-heading">
+	    <h3><strong>Consultar Egresos</strong><br></h3>
+
+	</div>
+	<div class="panel-body">	
+		<table class="table table-striped table-hover">
+	        <thead>
+	          <tr>
+	            <td>ID Egreso</td>
+	            <td>ID Cuenta</td>
+	            <td>Descripción del Egreso</td>
+	            <td> Valor</td>
+	            <td>Fecha del Egreso </td>
+	          </tr>
+	        </thead>
+	        <tbody>
+	         {% for egresov in egresov %}
+	          <tr>
+		            <td>
+		                {{egresov.0}}
+		            </td>
+		            <td>
+		               {{egresov.1}}
+		            </td>
+		            <td>
+		               {{egresov.2}}
+		            </td>
+		           <td>
+		               {{'{:,.2f}'.format(egresov.3)}}
+		           <td> 
+		                {{egresov.4}}
+		            </td>
+	          </tr>
+	        {% endfor %}
+	        </tbody>
+	    </table>
+	</div>
+</div>
+
+</body>
+</html>
+{% endblock %}
